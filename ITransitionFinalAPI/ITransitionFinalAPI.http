@@ -1,0 +1,6 @@
+@ITransitionFinalAPI_HostAddress = http://localhost:5262
+
+GET {{ITransitionFinalAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
