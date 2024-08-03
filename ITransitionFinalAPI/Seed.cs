@@ -44,7 +44,6 @@ namespace ITransitionFinalAPI
                 dataContext.Collections.AddRange(collections);
                 dataContext.SaveChanges();
 
-                // Create some initial users
                 var users = new List<UserCollector>
                 {
                     new UserCollector
@@ -61,7 +60,7 @@ namespace ITransitionFinalAPI
                     }
                 };
 
-                dataContext.UserCollector.AddRange(users);
+                dataContext.UserCollectors.AddRange(users);
                 dataContext.SaveChanges();
 
                 var comments = new List<Comment>

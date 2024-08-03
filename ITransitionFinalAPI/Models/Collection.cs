@@ -15,14 +15,14 @@
         public int? CustomInt3 { get; set; }
 
         // Custom string Fields
-        public string CustomString1 { get; set; }
-        public string CustomString2 { get; set; }
-        public string CustomString3 { get; set; }
+        public string? CustomString1 { get; set; }
+        public string? CustomString2 { get; set; }
+        public string? CustomString3 { get; set; }
 
         // Custom multiline Fields
-        public string CustomMultilineText1 { get; set; }
-        public string CustomMultilineText2 { get; set; }
-        public string CustomMultilineText3 { get; set; }
+        public string? CustomMultilineText1 { get; set; }
+        public string? CustomMultilineText2 { get; set; }
+        public string? CustomMultilineText3 { get; set; }
 
         // Custom check Fields
         public bool? CustomBoolean1 { get; set; }

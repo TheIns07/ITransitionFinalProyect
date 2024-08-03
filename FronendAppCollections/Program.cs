@@ -1,4 +1,4 @@
-using FronendAppCollections.Components;
+using FrontendAppCollections.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
