@@ -1,30 +1,24 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">FronendAppCollections</a>
+        <!-- Logo -->
+        <a class="navbar-brand" href="/">
+            <img src="https://images.vexels.com/media/users/3/185202/isolated/preview/04210f166dee214fc751791106b453b2-donut-pink-syrup-icon.png" alt="Logo" style="height: 40px;">
+        </a>
+
+        <!-- Search Bar -->
+        <div class="collapse navbar-collapse justify-content-center">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex">
+            <button class="btn btn-outline-primary me-2" type="button">Login</button>
+            <button class="btn btn-outline-secondary me-2" type="button">Dark Mode</button>
+            <button class="btn btn-outline-info" type="button">Custom</button>
+        </div>
     </div>
-</div>
-
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
+</nav>
