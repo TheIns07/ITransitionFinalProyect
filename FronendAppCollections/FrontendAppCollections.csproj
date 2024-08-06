@@ -22,4 +22,8 @@
     <None Include="Components\Pages\AdminPage.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ITransitionFinalAPI\ITransitionFinalAPI.csproj" />
+  </ItemGroup>
+
 </Project>

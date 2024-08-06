@@ -1,5 +1,43 @@
-﻿<h3>AdminPage</h3>
+﻿@page "/admin"
 
+<h3>AdminPage</h3>
+
+<h3>Lista de Usuarios</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Fecha de Registro</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (users != null && users.Any())
+        {
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Role</td>
+                    <td>@user.DateSigned.ToShortDateString()</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => AddToAdmin(user.Id)">Agregar a Admin</button>
+                        <button class="btn btn-warning" @onclick="() => BlockUser(user.Id)">Bloquear</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteUser(user.Id)">Eliminar</button>
+                        <button class="btn btn-info" @onclick="() => ViewCollections(user.Id)">Ver Colecciones</button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No hay usuarios disponibles.</td>
+            </tr>
+        }
+    </tbody>
+</table>
 @code {
 
 }

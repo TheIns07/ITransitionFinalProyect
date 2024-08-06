@@ -2,6 +2,8 @@ using ITransitionFinalAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using ITransitionFinalAPI;
 using System.Text.Json.Serialization;
+using ITransitionFinalAPI.Interfaces;
+using ITransitionFinalAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,13 @@ builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddTransient<Seed>();
+
+builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<ICollectionCommentRepository, CollectionCommentRepository>();
+builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ILikedCollectionRepository, LikedCollectionRepository>();
+builder.Services.AddScoped<IUserCollectorRepository, UserCollectorRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
