@@ -18,12 +18,12 @@ namespace FrontendAppCollections.Services
 
         public async Task AddToAdminAsync(int userId)
         {
-            await _httpClient.PostAsJsonAsync($"api/users/add-admin/{userId}", null); // Cambia la URL según sea necesario
+            await _httpClient.PostAsJsonAsync<object>($"api/users/add-admin/{userId}", null); // Cambia la URL según sea necesario
         }
 
         public async Task BlockUserAsync(int userId)
         {
-            await _httpClient.PostAsJsonAsync($"api/users/block/{userId}", null); // Cambia la URL según sea necesario
+            await _httpClient.PostAsJsonAsync<object>($"api/users/block/{userId}", null); // Cambia la URL según sea necesario
         }
 
         public async Task DeleteUserAsync(int userId)

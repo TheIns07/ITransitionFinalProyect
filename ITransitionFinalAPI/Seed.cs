@@ -22,10 +22,10 @@ namespace ITransitionFinalAPI
                     new Tag { Name = "Technology" }
                 };
 
-                dataContext.Tags.AddRange(tags);
-                dataContext.SaveChanges();
+                        dataContext.Tags.AddRange(tags);
+                        dataContext.SaveChanges();
 
-                var collections = new List<Collection>
+                        var collections = new List<Collection>
                 {
                     new Collection
                     {
@@ -41,10 +41,10 @@ namespace ITransitionFinalAPI
                     }
                 };
 
-                dataContext.Collections.AddRange(collections);
-                dataContext.SaveChanges();
+                        dataContext.Collections.AddRange(collections);
+                        dataContext.SaveChanges();
 
-                var users = new List<UserCollector>
+                        var users = new List<UserCollector>
                 {
                     new UserCollector
                     {
@@ -60,10 +60,10 @@ namespace ITransitionFinalAPI
                     }
                 };
 
-                dataContext.UserCollectors.AddRange(users);
-                dataContext.SaveChanges();
+                        dataContext.UserCollectors.AddRange(users);
+                        dataContext.SaveChanges();
 
-                var comments = new List<Comment>
+                        var comments = new List<Comment>
                 {
                     new Comment
                     {
@@ -79,40 +79,40 @@ namespace ITransitionFinalAPI
                     }
                 };
 
-                dataContext.Comments.AddRange(comments);
-                dataContext.SaveChanges();
+                        dataContext.Comments.AddRange(comments);
+                        dataContext.SaveChanges();
 
-                var collectionComments = new List<CollectionComments>
+                        var collectionComments = new List<CollectionComments>
                 {
                     new CollectionComments
                     {
-                        IdCollection = collections[0].Id,
-                        IdComment = comments[0].Id,
-                        IdCollectorUser = users[0].Id
+                        Collection = collections[0],  
+                        Comment = comments[0],        
+                        UserCollector = users[0]      
                     },
                     new CollectionComments
                     {
-                        IdCollection = collections[1].Id,
-                        IdComment = comments[1].Id,
-                        IdCollectorUser = users[1].Id
+                        Collection = collections[1], 
+                        Comment = comments[1],       
+                        UserCollector = users[1]      
                     }
                 };
 
-                dataContext.CommentsInCollections.AddRange(collectionComments);
-                dataContext.SaveChanges();
+                        dataContext.CommentsInCollections.AddRange(collectionComments);
+                        dataContext.SaveChanges();
 
-                var likedCollections = new List<LikedCollection>
+                        var likedCollections = new List<LikedCollection>
                 {
                     new LikedCollection
                     {
-                        IdCollection = collections[0].Id,
-                        IdUserCollector = users[1].Id,
+                        Collection = collections[0],  
+                        UserCollector = users[1],      
                         DateRegistred = DateTime.UtcNow
                     },
                     new LikedCollection
                     {
-                        IdCollection = collections[1].Id,
-                        IdUserCollector = users[0].Id,
+                        Collection = collections[1],  
+                        UserCollector = users[0],     
                         DateRegistred = DateTime.UtcNow
                     }
                 };

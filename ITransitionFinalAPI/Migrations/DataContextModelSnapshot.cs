@@ -22,6 +22,21 @@ namespace ITransitionFinalAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CollectionTag", b =>
+                {
+                    b.Property<int>("CollectionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CollectionsId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("CollectionTag");
+                });
+
             modelBuilder.Entity("ITransitionFinalAPI.Models.Collection", b =>
                 {
                     b.Property<int>("Id")
@@ -139,6 +154,35 @@ namespace ITransitionFinalAPI.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("ITransitionFinalAPI.Models.ItemCollection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateSigned")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("ItemsCollections");
+                });
+
             modelBuilder.Entity("ITransitionFinalAPI.Models.LikedCollection", b =>
                 {
                     b.Property<int>("IdCollection")
@@ -165,16 +209,11 @@ namespace ITransitionFinalAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CollectionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CollectionId");
 
                     b.ToTable("Tags");
                 });
@@ -201,6 +240,21 @@ namespace ITransitionFinalAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserCollectors");
+                });
+
+            modelBuilder.Entity("CollectionTag", b =>
+                {
+                    b.HasOne("ITransitionFinalAPI.Models.Collection", null)
+                        .WithMany()
+                        .HasForeignKey("CollectionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITransitionFinalAPI.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ITransitionFinalAPI.Models.Collection", b =>
@@ -237,6 +291,17 @@ namespace ITransitionFinalAPI.Migrations
                     b.Navigation("UserCollector");
                 });
 
+            modelBuilder.Entity("ITransitionFinalAPI.Models.ItemCollection", b =>
+                {
+                    b.HasOne("ITransitionFinalAPI.Models.Collection", "Collection")
+                        .WithMany("ItemsCollection")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Collection");
+                });
+
             modelBuilder.Entity("ITransitionFinalAPI.Models.LikedCollection", b =>
                 {
                     b.HasOne("ITransitionFinalAPI.Models.Collection", "Collection")
@@ -256,20 +321,13 @@ namespace ITransitionFinalAPI.Migrations
                     b.Navigation("UserCollector");
                 });
 
-            modelBuilder.Entity("ITransitionFinalAPI.Models.Tag", b =>
-                {
-                    b.HasOne("ITransitionFinalAPI.Models.Collection", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("CollectionId");
-                });
-
             modelBuilder.Entity("ITransitionFinalAPI.Models.Collection", b =>
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("LikedCollections");
+                    b.Navigation("ItemsCollection");
 
-                    b.Navigation("Tags");
+                    b.Navigation("LikedCollections");
                 });
 
             modelBuilder.Entity("ITransitionFinalAPI.Models.Comment", b =>

@@ -27,6 +27,19 @@ namespace ITransitionFinalAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserCollectors",
                 columns: table => new
                 {
@@ -77,6 +90,30 @@ namespace ITransitionFinalAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CollectionTag",
+                columns: table => new
+                {
+                    CollectionsId = table.Column<int>(type: "int", nullable: false),
+                    TagsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CollectionTag", x => new { x.CollectionsId, x.TagsId });
+                    table.ForeignKey(
+                        name: "FK_CollectionTag_Collections_CollectionsId",
+                        column: x => x.CollectionsId,
+                        principalTable: "Collections",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CollectionTag_Tags_TagsId",
+                        column: x => x.TagsId,
+                        principalTable: "Tags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CommentsInCollections",
                 columns: table => new
                 {
@@ -109,6 +146,28 @@ namespace ITransitionFinalAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ItemsCollections",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateSigned = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CollectionId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemsCollections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItemsCollections_Collections_CollectionId",
+                        column: x => x.CollectionId,
+                        principalTable: "Collections",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LikedCollections",
                 columns: table => new
                 {
@@ -133,29 +192,15 @@ namespace ITransitionFinalAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CollectionId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tags_Collections_CollectionId",
-                        column: x => x.CollectionId,
-                        principalTable: "Collections",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Collections_UserCollectorId",
                 table: "Collections",
                 column: "UserCollectorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CollectionTag_TagsId",
+                table: "CollectionTag",
+                column: "TagsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommentsInCollections_IdComment",
@@ -168,21 +213,27 @@ namespace ITransitionFinalAPI.Migrations
                 column: "UserCollectorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ItemsCollections_CollectionId",
+                table: "ItemsCollections",
+                column: "CollectionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LikedCollections_IdUserCollector",
                 table: "LikedCollections",
                 column: "IdUserCollector");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tags_CollectionId",
-                table: "Tags",
-                column: "CollectionId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CollectionTag");
+
+            migrationBuilder.DropTable(
                 name: "CommentsInCollections");
+
+            migrationBuilder.DropTable(
+                name: "ItemsCollections");
 
             migrationBuilder.DropTable(
                 name: "LikedCollections");

@@ -5,6 +5,8 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateSigned { get; set; }
+
+        public List<ItemCollection> ItemsCollection { get; set; } = new List<ItemCollection>();
         public List<Tag> Tags { get; set; } = new List<Tag>();
         public List<CollectionComments> Comments { get; set; } = new List<CollectionComments>();
         public List<LikedCollection> LikedCollections { get; set; } = new List<LikedCollection>();
